@@ -12,6 +12,7 @@ Route::group(['middleware' => ['admin', 'lang'], 'namespace' => 'Web\Admin', 'pr
     Route::get('/dashboard', 'DashboardController@dashboard')->name('admin.dashboard');
     Route::get('/dashboard-yajra', 'DashboardController@dashboardYajra')->name('admin.dashboard.yajra');
     Route::get('/delete-user/{id}', 'UserController@deleteUser')->name('delete.user');
+    Route::get('/test-relation', 'DashboardController@relationTest');
     Route::get('/change-lang/{lang}', function ($lang) {
         Session::put('lang',$lang);
         return redirect()->back();

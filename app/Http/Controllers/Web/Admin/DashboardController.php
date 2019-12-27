@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Services\UserService;
 use App\Http\Services\Logger;
 use App;
+use App\Models\User;
+use App\Models\OrderDetail;
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -44,5 +47,18 @@ class DashboardController extends Controller
         } catch(\Exception $e) {
             $logger->log('dashboard', $e->getMessage());
         }
+    }
+
+    public function relationTest() {
+        $user3 = User::with('orders.orderDetails')->where(['id' => 3])->first();
+        $data['user3'] = $user3;
+
+        $orderDetail3 = OrderDetail::with('order.user')->where(['id' => 5])->first();
+        $data['orderDetail3'] = $orderDetail3;
+
+        $order3 = Order::with(['user', 'orderDetails'])->where(['id' => 3])->first();
+        $data['order3'] = $order3;
+
+        dd($data);
     }
 }

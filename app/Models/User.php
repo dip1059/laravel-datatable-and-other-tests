@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class User extends Authenticatable
 {
@@ -37,4 +39,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    /*public function orderDetails() {
+        return $this->hasManyThrough(OrderDetail::class,Order::class);
+    }*/
 }
